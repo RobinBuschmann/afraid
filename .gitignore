@@ -10,6 +10,7 @@ node_modules
 # build
 *.js
 *.js.map
+lib/express-serve-static-core-extensions.d.ts
 
 # test
 .nyc_output

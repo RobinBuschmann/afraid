@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build-express-ext": "node -r ts-node/register build/express-extension-factory.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,7 +17,10 @@
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
+    "@types/express": "^4.16.0",
     "body-parser": "^1.18.3",
+    "class-transformer": "^0.1.9",
+    "class-validator": "^0.9.1",
     "express": "^4.16.3",
     "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
