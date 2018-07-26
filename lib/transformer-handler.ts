@@ -1,9 +1,12 @@
-import {Response, Request, NextFunction} from 'express-serve-static-core';
+import {NextFunction, Request, Response} from 'express-serve-static-core';
+import {IncomingHttpHeaders} from 'http';
 
 export interface StrictRequest extends Request {
-    query: {};
-    params: {};
     body: {};
+    cookies: {};
+    headers: {} & IncomingHttpHeaders;
+    params: {};
+    query: {};
 }
 
 export interface TransformerHandler<R> {

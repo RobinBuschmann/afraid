@@ -2,8 +2,8 @@ import {validationResult} from 'express-validator/check';
 import {createServer} from "http";
 import * as express from 'express';
 import {json} from 'body-parser';
-import {body, param, query} from './lib/transformer';
 import {IsInt, IsString} from 'class-validator';
+import {body, cookie, header, param, query} from './lib/transformers';
 
 const app = express();
 
@@ -18,11 +18,15 @@ app.use(json());
 
 app.post('/users/:id',
     [
-        param('id').int(),
+        param('id'),
         query('limit').int().opt(),
-        query('filters').string().array().opt(),
-        query('test').opt(),
-        body(User),
+        // query('filters').string().array(),
+        // query('test'),
+        // header('page'),
+        // cookie('yeah'),
+        // body('name').string(),
+        // body('age').int(),
+        body(User).opt(),
     ],
     (req, res, next) => {
         try {
@@ -31,7 +35,9 @@ app.post('/users/:id',
             res.send({
                 query: req.query,
                 params: req.params,
-                body: req.body,
+                headers: req.headers,
+                cookies: req.cookies,
+                body: req.body
             });
         } catch (e) {
             next(e);
