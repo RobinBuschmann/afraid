@@ -6,7 +6,7 @@ import {
     query as evQuery,
     ValidatorOptions,
 } from 'express-validator/check';
-import {BaseTransformer, BodyClassTransformerChain, TransformerChain} from './transformer';
+import {BodyClassTransformerChain, TransformerChain} from './transformer';
 import {bodyClassTransformer} from './body-class-transformer';
 import IsFloatOptions = ValidatorOptions.IsFloatOptions;
 import IsIntOptions = ValidatorOptions.IsIntOptions;
@@ -40,20 +40,20 @@ const base = {
     },
 };
 
-export const query = <F extends string>(field: F): TransformerChain<{ query: { [X in F]: any } }> =>
+export const query = <F extends string>(field: F): TransformerChain<{ query: { [X in F]: string } }> =>
     Object.assign(evQuery(field), base).exists();
 
-export const cookie = <F extends string>(field: F): TransformerChain<{ cookies: { [X in F]: any } }> =>
+export const cookie = <F extends string>(field: F): TransformerChain<{ cookies: { [X in F]: string } }> =>
     Object.assign(evCookie(field), base).exists();
 
-export const header = <F extends string>(field: F): TransformerChain<{ headers: { [X in F]: any } }> =>
+export const header = <F extends string>(field: F): TransformerChain<{ headers: { [X in F]: string } }> =>
     Object.assign(evHeader(field), base).exists();
 
-export const param = <F extends string>(field: F): TransformerChain<{ params: { [X in F]: any } }> =>
+export const param = <F extends string>(field: F): TransformerChain<{ params: { [X in F]: string } }> =>
     Object.assign(evParam(field), base).exists();
 
 interface BodyTransformerFactory {
-    <F extends string>(field: F): TransformerChain<{ body: { [X in F]: any } }>;
+    <F extends string>(field: F): TransformerChain<{ body: { [X in F]: string|number|boolean } }>;
     <T>(type: new() => T): BodyClassTransformerChain<{ body: T }>;
 }
 export const body: BodyTransformerFactory = typeOrField =>

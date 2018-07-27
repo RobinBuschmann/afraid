@@ -27,7 +27,7 @@ export interface BodyClassTransformerChain<REQUEST> extends BaseTransformer<REQU
 }
 
 type SetTypeLayer1<T, TYPE> = { [P in keyof T]: SetType<T[P], TYPE>; }
-type SetType<T, TYPE> = { [P in keyof T]: TYPE; }
-type PartialLayer1<T> = { [P in keyof T]: Partial<T[P]>; }
+type SetType<T, TYPE> = { [P in keyof T]: TYPE; };
+type PartialLayer1<T> = { [P in keyof T]: Partial<T[P]>; };
 type ArrayfyLayer1<T> = { [P in keyof T]: Arrayfy<T[P]>; };
-type Arrayfy<T> = { [P in keyof T]: Array<T[P]>; }
+type Arrayfy<T> = { [P in keyof T]: Array<T[P]>; };

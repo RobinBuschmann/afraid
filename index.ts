@@ -19,19 +19,23 @@ app.use(json());
 app.post('/users/:id',
     [
         param('id'),
-        query('limit').int().opt(),
-        // query('filters').string().array(),
-        // query('test'),
-        // header('page'),
-        // cookie('yeah'),
-        // body('name').string(),
-        // body('age').int(),
-        body(User).opt(),
+        query('limit').int().array().opt(),
+        query('limit2').array(),
+        query('filters').string().array(),
+        query('test'),
+        header('page'),
+        cookie('yeah'),
+        body('name').string(),
+        body('age').int(),
+        body(User).array().opt(),
     ],
     (req, res, next) => {
         try {
             const result = validationResult(req);
             result.throw();
+            if(req.query.limit) {
+                req.query.limit.map(t => t.toFixed(1));
+            }
             res.send({
                 query: req.query,
                 params: req.params,
