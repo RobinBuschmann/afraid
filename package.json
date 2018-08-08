@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build-express-ext": "node -r ts-node/register build/express-extension-factory.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check-typings": "typings-checker --allow-expect-error --project test/typings/tsconfig.json test/typings/*.ts",
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +37,7 @@
     "source-map-support": "^0.5.6",
     "supertest": "^3.1.0",
     "ts-node": "^7.0.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "typings-checker": "^2.0.0"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
@@ -12,13 +13,8 @@
     "pretty": true
   },
   "include": [
-    "lib",
-    "build",
-    "test",
-    "index.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "test/typings"
+    "body.ts",
+    "query.ts",
+    "query.ts"
   ]
 }
