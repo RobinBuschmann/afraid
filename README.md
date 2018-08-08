@@ -2,8 +2,8 @@
 An express middleware for validating incoming data with type inference.
 (This library uses express-validator under the hood)
 
-![alt text](https://github.com/RobinBuschmann/express-transformer/tree/master/demos/et-demo-1)
-![alt text](https://github.com/RobinBuschmann/express-transformer/tree/master/demos/et-demo-2)
+![alt text](https://github.com/RobinBuschmann/express-transformer/tree/master/demos/et-demo-1.gif)
+![alt text](https://github.com/RobinBuschmann/express-transformer/tree/master/demos/et-demo-2.gif)
 
 ## Installation
 ```bash
@@ -12,7 +12,7 @@ npm install express-transformer --save
 
 ### Usage with class-transformer / class-validator
 
-![alt text](https://github.com/RobinBuschmann/express-transformer/tree/master/demos/et-demo-3)
+![alt text](https://github.com/RobinBuschmann/express-transformer/tree/master/demos/et-demo-3.gif)
 
 *class-transformer* and *class-validator* are requiring [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
 ```
