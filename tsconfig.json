@@ -14,10 +14,10 @@
   "include": [
     "lib",
     "build",
+    "test",
     "index.ts"
   ],
   "exclude": [
-    "src",
     "node_modules"
   ]
 }
