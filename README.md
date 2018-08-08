@@ -3,6 +3,7 @@ An express middleware for validating incoming data with type inference.
 (This library uses express-validator under the hood)
 
 ![](https://github.com/RobinBuschmann/express-transformer/raw/master/demos/et-demo-1.gif)
+
 ![](https://github.com/RobinBuschmann/express-transformer/raw/master/demos/et-demo-2.gif)
 
 ## Installation
