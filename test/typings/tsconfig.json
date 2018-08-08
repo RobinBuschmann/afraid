@@ -13,8 +13,6 @@
     "pretty": true
   },
   "include": [
-    "body.ts",
-    "query.ts",
-    "query.ts"
+    "./*.ts"
   ]
 }
