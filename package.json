@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "build-express-ext": "node -r ts-node/register build/express-extension-factory.ts",
     "check-typings": "typings-checker --allow-expect-error --project test/typings/tsconfig.json test/typings/*.ts",
     "test": "mocha"

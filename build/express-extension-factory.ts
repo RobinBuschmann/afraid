@@ -17,7 +17,8 @@ declare module 'express-serve-static-core' {
             <${map(innerCount, i => `R${i} extends {}`).join(',')}>
             (path: PathParams,
             transformers: [
-                ${map(innerCount, i => `Transformer<R${i}>`).join(',')} 
+                ${map(innerCount, i => `Transformer<R${i}>`).join(',')}
+                ${map(innerCount, i => `Transformer<R${i}>`).join(',')}
             ],
             handler: TransformerHandler<${map(innerCount, i => `R${i}`).join(' & ')}>): T;
         `).reverse().join('\n')}

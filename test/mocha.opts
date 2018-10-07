@@ -5,3 +5,4 @@
 --full-trace
 
 test/**/*.spec.ts
+lib/**/*.spec.ts

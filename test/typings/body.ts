@@ -1,5 +1,6 @@
 import * as express from 'express';
 import {body, fail} from '../../';
+import {response} from '../../lib/response';
 
 const app = express();
 
@@ -36,6 +37,21 @@ class User {
     birthday: Date;
     email: string;
 }
+
+// Should infer types correctly
+app.post('/', [
+        body('name').string().opt(),
+    ],
+    [
+        response('name').string().array(),
+    ], (req, res, next) => {
+
+        // $ExpectType string | undefined
+        req.body.name;
+
+        res.send({name: [true]});
+
+    });
 
 // Should infer types correctly
 app.post('/', [
