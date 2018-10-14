@@ -1,7 +1,7 @@
-import {createChain, extractMeta} from './chain';
-import {validate} from './validate';
-import {transform} from './transform';
-import {FieldChain} from './field';
+import {createChain, extractMeta} from './meta/functional/chain-creator';
+import {validate} from './validation/validate';
+import {transform} from './transformation/transform';
+import {FieldChain} from './meta/functional/field';
 
 interface Handler {
     (...a: object[]);
@@ -21,9 +21,13 @@ interface Body {
 const chain = createChain(['opt', 'array']);
 
 export const body: Body = (...args: any[]) =>
-    Object.assign(function handler(req, res, next) {
-        const meta = extractMeta(handler as any);
-        req.validationErrors = validate(meta, req);
-        req.body = transform(meta, req);
-        next();
-    }, chain, {meta: {field: 'body', sub: args.map(extractMeta)}}) as any;
+    Object.assign(
+        function handler(req, res, next) {
+            const meta = extractMeta(handler as any);
+            req.validationErrors = validate(meta, req);
+            req.body = transform(meta, req);
+            next();
+        },
+        chain,
+        {meta: {field: 'body', sub: args.map(extractMeta)}},
+    ) as any;

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "build-express-ext": "node -r ts-node/register build/express-extension-factory.ts",
+    "build-chain": "node -r ts-node/register build/chain-factory.ts",
     "check-typings": "typings-checker --allow-expect-error --project test/typings/tsconfig.json test/typings/*.ts",
     "test": "mocha"
   },
@@ -25,6 +26,7 @@
     "@types/sinon": "^5.0.1",
     "@types/sinon-chai": "^3.2.0",
     "@types/supertest": "^2.0.5",
+    "@types/validator": "^9.4.2",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "class-transformer": "^0.1.9",
@@ -39,6 +41,7 @@
     "supertest": "^3.1.0",
     "ts-node": "^7.0.0",
     "typescript": "^3.0.1",
-    "typings-checker": "^2.0.0"
+    "typings-checker": "^2.0.0",
+    "validator": "^10.8.0"
   }
 }

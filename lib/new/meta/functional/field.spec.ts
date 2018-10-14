@@ -6,7 +6,7 @@ describe('field', () => {
     it('should set meta data for validation/transformation', () => {
         const {meta} = field('age').int().array() as any;
         expect(meta).to.have.property('field', 'age');
-        expect(meta).to.have.property('type', 'integer');
+        expect(meta).to.have.property('type', 'int');
         expect(meta).to.have.property('isArray', true);
     });
 
