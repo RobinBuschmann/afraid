@@ -4,18 +4,18 @@ export const validate = (options, objectOrObjects) => {
     const results: any[] = [];
     toArray(objectOrObjects)
         .forEach((object) => {
-            options.forEach(({field, isOptional, validators, sub, classObject}) => {
+            options.forEach(({field, isOptional, validators, fields}) => {
                 let value = object[field];
                 const values = toArray(value);
                 if (value !== undefined) {
-                    if (sub) {
-                        results.push(...validate(sub, values));
+                    if (fields) {
+                        results.push(...validate(fields, values));
                         return;
                     }
                     values.forEach(value =>
-                        validators.forEach(validator => {
+                        (validators || []).forEach(validator => {
                             const result = validator(value);
-                            if(result) results.push(result);
+                            if (result) results.push(result);
                         }),
                     );
                     return;

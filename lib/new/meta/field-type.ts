@@ -1,5 +1,5 @@
 
-export enum Type {
+export enum FieldType {
     string =  'string',
     int =  'int',
     float =  'float',

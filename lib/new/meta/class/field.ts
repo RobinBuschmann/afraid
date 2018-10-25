@@ -9,7 +9,8 @@ export function Field(...args: any[]) {
         const designType = Reflect.getMetadata('design:type', target, field);
         const typeFn = targetOrTypeFunction || (() => designType);
         Type(typeFn)(target, field);
-        setFieldMeta(target, field, {field, typeFn, isArray: Array === designType});
+        const isArrayMeta = Array === designType ? {isArray: true} : {};
+        setFieldMeta(target, field, {field, typeFn, ...isArrayMeta});
     };
     if (args.length === 1) {
         const [typeFn] = args;

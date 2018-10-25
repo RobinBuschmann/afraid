@@ -1,29 +1,34 @@
 import 'reflect-metadata';
-import {Type} from '../type';
+import {FieldType} from '../field-type';
+import {mergeMeta} from '../meta-utils';
 
 const META_KEY = 'express-transformer:fields';
 
-export const getFieldMeta = target =>
+export const getAllFieldMeta = target =>
     Reflect.getMetadata(META_KEY, target) || {};
 
-export const setFieldMeta = (target, key, value) => {
-    const currentMeta = getFieldMeta(target);
-    Reflect.defineMetadata(META_KEY, {...currentMeta, [key]: {...currentMeta[key], ...value}}, target);
+export const setFieldMeta = (target, field, fieldMeta) => {
+    const currentMeta = getAllFieldMeta(target);
+    const currentFieldMeta = currentMeta[field] || {};
+    Reflect.defineMetadata(META_KEY, {
+        ...currentMeta,
+        [field]: mergeMeta(currentFieldMeta, fieldMeta)
+    }, target);
 };
 
 export const resolveFieldMeta = target => {
-    const fieldMeta = getFieldMeta(target.prototype);
-    Object.keys(fieldMeta)
-        .reduce((acc, key) => {
-            const {typeFn, ...options} = fieldMeta[key];
+    const allFieldMeta = getAllFieldMeta(target.prototype);
+    return Object.keys(allFieldMeta)
+        .reduce((acc, field) => {
+            const {typeFn, ...options} = allFieldMeta[field];
             const typeObject = typeFn();
-            const type = getType(target, typeObject, options.field);
+            const type = typeMap.get(typeObject) || options.type;
             if (typeof type === 'string') {
                 acc.push({type, ...options});
             } else {
                 acc.push({
                     ...options,
-                    type: Type.object,
+                    type: FieldType.object,
                     fields: resolveFieldMeta(typeObject),
                 });
             }
@@ -32,14 +37,7 @@ export const resolveFieldMeta = target => {
 };
 
 const typeMap = new Map<object, string>([
-    [String, 'string'],
-    [Boolean, 'boolean'],
-    [Date, 'date'],
+    [String, FieldType.string],
+    [Boolean, FieldType.boolean],
+    [Date, FieldType.date],
 ]);
-
-const getType = (target, typeObject, field) => {
-    // if (typeObject === Number) {
-    //     return (isIntByValidationData(target, field) ? Type.int : Type.float);
-    // }
-    return typeMap.get(typeObject);
-};

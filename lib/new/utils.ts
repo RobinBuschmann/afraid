@@ -9,4 +9,4 @@ export const toArray = value => Array.isArray(value)
 
 export const flatten = <T>(arr: T[][]) => ([] as T[]).concat(...arr);
 
-export const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.substr(0, value.length);
+export const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.substr(1, value.length);

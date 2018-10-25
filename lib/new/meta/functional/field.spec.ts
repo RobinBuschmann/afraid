@@ -15,10 +15,10 @@ describe('field', () => {
             field('name').string()
         ) as any;
         expect(meta).to.have.property('field', 'obj');
-        expect(meta).to.have.property('sub').that.has.lengthOf(1);
+        expect(meta).to.have.property('fields').that.has.lengthOf(1);
 
-        expect(meta.sub[0]).to.have.property('field', 'name');
-        expect(meta.sub[0]).to.have.property('type', 'string');
+        expect(meta.fields[0]).to.have.property('field', 'name');
+        expect(meta.fields[0]).to.have.property('type', 'string');
     });
 
 });
