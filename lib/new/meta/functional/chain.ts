@@ -85,7 +85,8 @@ export interface Chain<OBJ extends {}> {
     toString(): Chain<OBJ>;
 }
 
-interface ChainBundler<OBJ> {
+export interface ChainBundler<OBJ> {
+    <T>(type: new () => T): Chain<SetType<OBJ, T>>
     <S1>(chain1: Chain<S1>): Chain<SetType<OBJ, S1>>
     <S1,S2>(chain1: Chain<S1>,chain2: Chain<S2>): Chain<SetType<OBJ, S1&S2>>
     <S1,S2,S3>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>): Chain<SetType<OBJ, S1&S2&S3>>
