@@ -3,9 +3,8 @@ import {isTransformerName} from '../transformation/utils';
 import {FieldType} from './field-type';
 import {extractMeta, mergeMeta} from './meta-utils';
 
-
 const createValidatorMeta = (validator, options) => ({
-    validators: [(value, field) => validator(value, ...options)
+    validators: [(value, field) => validator(String(value), ...options)
         ? undefined
         : {field, value, msg: (options[validator.length] || '"{name}" validation of field "{field}" failed: "{value}" is not valid')
                 .replace('{name}', validator.name)

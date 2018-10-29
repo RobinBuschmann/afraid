@@ -1,4 +1,4 @@
-import {createChain} from '../meta/functional/chain-creator';
+import {createChain} from '../meta/functional/chain-factory';
 import {resolveFieldMeta as resolveClassFieldMeta} from '../meta/class/field-meta';
 import {resolveFieldMeta as resolveFunctionalFieldMeta} from '../meta/functional/field-meta';
 import {extractMeta} from '../meta/meta-utils';

@@ -1,4 +1,4 @@
-import {createChain} from './chain-creator';
+import {createChain} from './chain-factory';
 import {Chain} from './chain';
 
 export type FieldChain<T extends {}> = Chain<T>;
