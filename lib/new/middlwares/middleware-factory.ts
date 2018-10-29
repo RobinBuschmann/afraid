@@ -17,8 +17,11 @@ export const createMiddleware = target => (...args: any[]) => {
         function handler(req, res, next) {
             const meta = extractMeta(handler as any);
             const wrapped = {[target]: req[target]};
+            // todo optimize/make async
             req.validationErrors = validate([meta], wrapped);
-            Object.assign(req, transform(meta, wrapped));
+
+            // todo optimize/make async
+            Object.assign(req, transform([meta], wrapped));
             next();
         },
         chain,

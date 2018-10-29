@@ -14,7 +14,7 @@ export const validate = (options, objectOrObjects) => {
                     }
                     values.forEach(value =>
                         (validators || []).forEach(validator => {
-                            const result = validator(value);
+                            const result = validator(value, field);
                             if (result) results.push(result);
                         }),
                     );

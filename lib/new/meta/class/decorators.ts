@@ -1,4 +1,4 @@
-import {createDecorators} from './decorators-creator';
+import {createDecorators} from './decorators-factory';
 
 const decorators = createDecorators();
 Object.assign(exports, decorators);

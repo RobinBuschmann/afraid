@@ -1,71 +1,61 @@
 import * as validators from "validator";
 import {isTransformerName} from '../transformation/utils';
-import {isValidatorName} from '../validation/utils';
 import {FieldType} from './field-type';
 import {extractMeta, mergeMeta} from './meta-utils';
 
-export const transformerOptions = Object
-    .keys(validators)
-    .filter(key => typeof validators[key] === 'function')
-    .filter(isTransformerName)
-    .reduce((acc, key) => {
-        acc[key] = options => ({
-            transformers: [v => validators[key](v, ...options)],
-        });
-        return acc;
-    }, {});
+
+const createValidatorMeta = (validator, options) => ({
+    validators: [(value, field) => validator(value, ...options)
+        ? undefined
+        : {field, value, msg: (options[validator.length] || '"{name}" validation of field "{field}" failed: "{value}" is not valid')
+                .replace('{name}', validator.name)
+                .replace('{field}', field)
+                .replace('{value}', value)}]
+});
+const createTransformerMeta = (transformer, options) => ({transformers: [(value) => transformer(value, ...options)]});
+
+export const additionalTypeMeta = {
+    toString: {type: FieldType.string},
+    toInt: {type: FieldType.int},
+    isInt: {type: FieldType.int},
+    toFloat: {type: FieldType.float},
+    isFloat: {type: FieldType.float},
+    toBoolean: {type: FieldType.boolean},
+    isBoolean: {type: FieldType.boolean},
+    toDate: {type: FieldType.date},
+};
 
 export const validatorOptions = Object
     .keys(validators)
     .filter(key => typeof validators[key] === 'function')
-    .filter(isValidatorName)
     .reduce((acc, key) => {
-        acc[key] = options => ({
-            validators: [v => validators[key](v, ...options)],
+        acc[key] = (...options) => ({
+            ...(isTransformerName(key)
+                ? createTransformerMeta(validators[key], options)
+                : createValidatorMeta(validators[key], options)),
+            ...(additionalTypeMeta[key] || {})
         });
         return acc;
     }, {});
 
-const string = () => ({type: FieldType.string, transformers: [validators.toString]});
+export const mergeableOptions = [
+    {from: ['toString'], to: 'string'},
+    {from: ['isInt', 'toInt'], to: 'int'},
+    {from: ['isFloat', 'toFloat'], to: 'float'},
+    {from: ['isBoolean', 'toBoolean'], to: 'boolean'},
+    {from: ['toDate'], to: 'date'},
+];
 
-const date = () => ({type: FieldType.date, transformers: [validators.toDate]});
+const mergeMetaFns = (options, fns) => mergeMeta(...fns.map(fn => fn(...options)));
 
-const floatType = () => ({type: FieldType.float});
-const floatTransformer = () => ({transformers: [validators.toFloat]});
-const floatValidator = (options) => ({validators: [v => validators.isFloat(v, options)]});
-
-const booleanType = () => ({type: FieldType.boolean});
-const booleanTransformers = (strict) => ({transformers: [v => validators.toBoolean(v, strict)]});
-const booleanValidators = () => ({validators: [validators.isBoolean],});
-
-const intType = () => ({type: FieldType.int});
-const intTransformer = (radix) => ({transformers: [v => validators.toInt(v, radix)]});
-const intValidator = (radix) => ({validators: [v => validators.isInt(v, radix)]});
-
-const mergeMetaFns = (options, ...fns) => mergeMeta(...fns.map(fn => fn(options)));
+const shortCutOptions = mergeableOptions.reduce((acc, {from, to}) => {
+    acc[to] = (...options) => mergeMetaFns(options, from.map(key => validatorOptions[key]));
+    return acc;
+}, {});
 
 export const options = {
-    ...transformerOptions,
     ...validatorOptions,
-
-    string,
-    toString: string,
-
-    date,
-    toDate: date,
-
-    float: options => mergeMetaFns(options, floatType, floatValidator, floatTransformer),
-    toFloat: options => mergeMetaFns(options, floatType, floatTransformer),
-    isFloat: options => mergeMetaFns(options, floatType, floatValidator),
-
-    boolean: options => mergeMetaFns(options, booleanType, booleanTransformers, booleanValidators),
-    toBoolean: options => mergeMetaFns(options, booleanType, booleanTransformers),
-    isBoolean: options => mergeMetaFns(options, booleanType, booleanValidators),
-
-    int: options => mergeMetaFns(options, intType, intTransformer, intValidator),
-    toInt: options => mergeMetaFns(options, intType, intTransformer),
-    isInt: options => mergeMetaFns(options, intType, intValidator),
-
+    ...shortCutOptions,
     opt: () => ({
         isOptional: true,
     }),
