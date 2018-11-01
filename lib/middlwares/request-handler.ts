@@ -1,5 +1,5 @@
-import {NextFunction, Request, Response, Send} from 'express-serve-static-core';
-import {IncomingHttpHeaders} from 'http';
+import {NextFunction, Request, Response} from 'express-serve-static-core';
+import {IncomingHttpHeaders} from "http";
 
 export interface StrictRequest extends Request {
     body: {};
@@ -15,6 +15,6 @@ export interface StrictResponse<B> extends Response {
     jsonp: (body: B) => StrictResponse<B>;
 }
 
-export interface TransformerHandler<R, S = any> {
+export interface RequestHandler<R, S = any> {
     (req: R & StrictRequest, res: StrictResponse<S>, next: NextFunction): any;
 }

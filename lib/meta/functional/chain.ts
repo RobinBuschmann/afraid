@@ -1,4 +1,8 @@
-import {Arrayfy, SetType} from '../../../utils';
+import {Arrayfy, SetType} from '../../utils';
+
+interface Handler {
+    (...a: object[]);
+}
 
 export interface Chain<OBJ extends {}> {
     date(): Chain<SetType<OBJ, Date>>

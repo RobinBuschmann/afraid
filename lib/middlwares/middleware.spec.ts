@@ -3,7 +3,6 @@ import {createMiddleware} from './middleware-factory';
 import {f} from '../meta/functional/field';
 import {ChainBundler} from '../meta/functional/chain';
 import {Field} from '../meta/class/field';
-import {FieldType} from '../meta/field-type';
 import {IsInt, Optional} from '../meta/class/decorators';
 
 describe('middleware', () => {
@@ -25,7 +24,7 @@ describe('middleware', () => {
                 f('arr').sub(
                     f('name').string(),
                 ).array(),
-            ).opt().array() as any;
+            ).opt().array();
         });
 
         it('should set meta data properly to handler', () => {

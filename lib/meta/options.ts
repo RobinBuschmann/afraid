@@ -1,7 +1,7 @@
 import * as validators from "validator";
-import {isTransformerName} from '../transformation/utils';
 import {FieldType} from './field-type';
 import {extractMeta, mergeMeta} from './meta-utils';
+import {isTransformerName} from '../transformation/utils';
 
 const createValidatorMeta = (validator, options) => ({
     validators: [(value, field) => validator(String(value), ...options)
