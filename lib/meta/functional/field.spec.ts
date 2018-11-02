@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {field} from './field';
 
-describe('field', () => {
+describe('meta.functional.field', () => {
 
     it('should set meta data for validation/transformation', () => {
         const {meta} = field('age').int().array() as any;
