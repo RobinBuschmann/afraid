@@ -12,6 +12,10 @@
   },
   "author": "",
   "license": "ISC",
+  "optionalDependencies": {
+    "class-transformer": "^0.1.9",
+    "reflect-metadata": "^0.1.12"
+  },
   "peerDependencies": {
     "@types/express": "*"
   },

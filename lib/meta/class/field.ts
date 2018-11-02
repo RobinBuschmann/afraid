@@ -1,6 +1,5 @@
-import 'reflect-metadata';
-import {Type} from 'class-transformer';
 import {setFieldMeta} from './field-meta';
+import {getClassTransformer} from './utils';
 
 export function Field(typeFn): PropertyDecorator;
 export function Field(target, key): void;
@@ -8,7 +7,7 @@ export function Field(...args: any[]) {
     const decorate = (targetOrTypeFunction) => (target, field) => {
         const designType = Reflect.getMetadata('design:type', target, field);
         const typeFn = targetOrTypeFunction || (() => designType);
-        Type(typeFn)(target, field);
+        getClassTransformer().Type(typeFn)(target, field);
         const isArrayMeta = Array === designType ? {isArray: true} : {};
         setFieldMeta(target, field, {field, typeFn, ...isArrayMeta});
     };

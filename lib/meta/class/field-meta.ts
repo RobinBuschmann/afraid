@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {FieldType} from '../field-type';
 import {mergeMeta} from '../meta-utils';
-import {plainToClass} from 'class-transformer';
+import {getClassTransformer} from './utils';
 
 const META_KEY = 'express-transformer:fields';
 const typeMap = new Map<object, string>([
@@ -51,7 +51,7 @@ export const resolveFieldMeta = target => {
             }, fieldsMeta as any)
     };
     return {
-        transformers: [v => plainToClass(target, v)],
+        transformers: [v => getClassTransformer().plainToClass(target, v)],
         fields: resolve(target),
     }
 };

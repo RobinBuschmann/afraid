@@ -13,8 +13,8 @@ app.post('/', [
         f('birthday').date(),
         f('email').string().isEmail(),
         f('nicknames').string().array(),
-        fail,
     ),
+    fail,
 ], (req, res, next) => {
 
     // $ExpectType string | undefined
