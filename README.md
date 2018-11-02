@@ -1,4 +1,4 @@
-# express-transformer
+# <package-name>
 An express middleware for validating incoming data with type inference.
 
 ## Installation
