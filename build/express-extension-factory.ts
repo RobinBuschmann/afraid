@@ -1,13 +1,13 @@
 import {writeFileSync} from 'fs';
 import {join} from 'path';
 
-const COUNT = 20;
-const FILE_PATH = join(__dirname, '..', 'lib', 'express-serve-static-core-extensions.d.ts');
+const COUNT = 15;
+const FILE_PATH = join(__dirname, '..', 'lib', 'express-extension.d.ts');
 
 const template = count => `
 import {IRouterMatcher, PathParams} from "express-serve-static-core";
-import {Transformer} from './transformer';
-import {TransformerHandler} from './transformer-handler';
+import {Middleware} from './middlewares/middlwares';
+import {TRequestHandler} from './middlewares/request-handler';
 
 declare module 'express-serve-static-core' {
 
@@ -17,9 +17,9 @@ declare module 'express-serve-static-core' {
             <${map(innerCount, i => `R${i} extends {}`).join(',')}>
             (path: PathParams,
             transformers: [
-                ${map(innerCount, i => `Transformer<R${i}>`).join(',')}
+                ${map(innerCount, i => `Middleware<R${i}>`).join(',')}
             ],
-            handler: TransformerHandler<${map(innerCount, i => `R${i}`).join(' & ')}>): T;
+            handler: TRequestHandler<${map(innerCount, i => `R${i}`).join(' & ')}>): T;
         `).reverse().join('\n')}
     
     }
