@@ -4,7 +4,7 @@ interface Handler {
     (...a: object[]);
 }
 
-export interface Chain<OBJ extends {}> extends Handler {
+export interface Chain<OBJ extends {}> extends Handler{
     date(): Chain<SetType<OBJ, Date>>
     float(): Chain<SetType<OBJ, number>>
     int(): Chain<SetType<OBJ, number>>
