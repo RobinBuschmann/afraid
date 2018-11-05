@@ -6,27 +6,33 @@ import {validate} from '../validation/validate';
 import {transform} from '../transformation/transform';
 import {ChainBundler} from '../meta/functional/chain';
 
-const chain = createChain();
+const defaultOptions = {
+    chain: createChain(),
+    createHandler: target => function handler(req, res, next) {
+        const meta = extractMeta(handler as any);
+        const wrapped = {[target]: req[target]};
 
-export const createMiddleware = <T extends string>(target: T): ChainBundler<{ [X in T] }> => (...args: any[]) => {
+        // todo optimize/make async
+        req.validationErrors = validate([meta], wrapped);
+
+        // todo optimize/make async
+        Object.assign(req, transform([meta], wrapped));
+
+        next();
+    }
+};
+
+type MiddlewareFactory = <T extends string>(target: T, options?: Partial<typeof defaultOptions>) => ChainBundler<{ [X in T] }>;
+
+export const createMiddleware: MiddlewareFactory = (target, options = {}) => (...args: any[]) => {
+    const {chain, createHandler} = {...options, ...defaultOptions};
     const [classReference] = args;
     const targetMeta = typeof classReference === 'function'
         ? resolveClassFieldMeta(classReference)
         : resolveFunctionalFieldMeta(args);
 
     return Object.assign(
-        function handler(req, res, next) {
-            const meta = extractMeta(handler as any);
-            const wrapped = {[target]: req[target]};
-
-            // todo optimize/make async
-            req.validationErrors = validate([meta], wrapped);
-
-            // todo optimize/make async
-            Object.assign(req, transform([meta], wrapped));
-
-            next();
-        },
+        createHandler(target),
         chain,
         {meta: {field: target, ...targetMeta}},
     ) as any
