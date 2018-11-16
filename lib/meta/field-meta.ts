@@ -1,6 +1,6 @@
 import {FieldType} from './field-type';
 
-interface FieldMeta {
+export interface FieldMeta {
     field: string;
     type: FieldType,
     transformers?: Array<Function>;

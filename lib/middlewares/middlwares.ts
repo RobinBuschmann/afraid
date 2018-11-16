@@ -13,7 +13,7 @@ export const fail: Middleware<{}> = ((req, res, next) => {
     const validationErrors = (req.validationErrors || []);
     if(validationErrors.length) {
         // todo
-        next({statusCode: 400});
+        next({statusCode: 400, validationErrors});
         return;
     }
     next();

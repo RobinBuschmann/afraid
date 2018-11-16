@@ -21,7 +21,7 @@ export const validate = (options, objectOrObjects) => {
                     return;
                 }
                 if (!isOptional) {
-                    results.push({msg: `Field "${field}" is missing`});
+                    results.push({field, value, msg: `Field "${field}" is missing`});
                 }
             }, [])
         });
