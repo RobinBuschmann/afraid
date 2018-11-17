@@ -1,3 +1,6 @@
+[![NPM](https://img.shields.io/npm/v/afraid.svg)](https://www.npmjs.com/package/afraid)
+[![Build Status](https://travis-ci.org/RobinBuschmann/afraid.svg?branch=master)](https://travis-ci.org/RobinBuschmann/afraid)
+
 # afraid
 > 😧 Afraid?! You don't need to be: Incoming data  of your express route is validated!
 Type inference included!
