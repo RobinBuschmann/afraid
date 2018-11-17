@@ -3,7 +3,7 @@ import {FieldType} from '../field-type';
 import {mergeMeta} from '../meta-utils';
 import {getClassTransformer} from './utils';
 
-const META_KEY = 'express-transformer:fields';
+const META_KEY = 'afraid:fields';
 const typeMap = new Map<object, string>([
     [String, FieldType.string],
     [Boolean, FieldType.boolean],

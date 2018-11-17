@@ -1,9 +1,13 @@
-# <package-name>
+# afraid
+> 😧 Afraid?! You don't need to be: Incoming data is validated!
+
 An express middleware for validating incoming data with type inference.
+
+![](https://github.com/RobinBuschmann/express-transformer/raw/master/demos/demo.gif)
 
 ## Installation
 ```bash
-npm install <package-name> --save
+npm install afraid --save
 ```
 
 ## Getting started
@@ -24,9 +28,7 @@ app.get('/users', [
 });
 ```
 
-### Usage with classes
-
-![](https://github.com/RobinBuschmann/express-transformer/raw/master/demos/et-demo-3.gif)
+### Usage with classes (optional)
 
 *class-transformer* are requiring [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
 ```
