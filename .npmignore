@@ -1,17 +1,10 @@
-# General
 .DS_Store
-.git
-
-# IDE
 .idea
-
-# Source
-test
+.travis.yml
 build
+test
 demos
-**/*.ts
-!**/*.d.ts
-**/*.js.map
-
-# Libs
 node_modules
+*.ts
+*.js.map
+!*.d.ts
