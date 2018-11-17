@@ -11,6 +11,7 @@ install:
 - npm install
 
 script:
+- npm run build-express-ext
 - npm run build
 - npm test
 - npm run check-typings
