@@ -1,7 +1,6 @@
 # afraid
-> 😧 Afraid?! You don't need to be: Incoming data is validated!
-
-An express middleware for validating incoming data with type inference.
+> 😧 Afraid?! You don't need to be: Incoming data  of your express route is validated!
+Type inference included!
 
 ![](https://github.com/RobinBuschmann/express-transformer/raw/master/demos/demo.gif)
 

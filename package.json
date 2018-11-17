@@ -1,16 +1,18 @@
 {
   "name": "afraid",
   "version": "1.0.0",
-  "description": "",
+  "description": "Express middlewares for validating incoming data with type inference",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsc",
     "build-express-ext": "node -r ts-node/register build/express-extension-factory.ts",
     "build-chain": "node -r ts-node/register build/chain-factory.ts",
     "check-typings": "typings-checker --allow-expect-error --project test/typings/tsconfig.json test/typings/*.ts",
-    "test": "mocha"
+    "test": "mocha",
+    "prepublish": "npm test && npm run build && npm run check-typings"
   },
-  "author": "",
+  "author": "Robin Baum",
   "license": "ISC",
   "optionalDependencies": {
     "class-transformer": "^0.1.9",

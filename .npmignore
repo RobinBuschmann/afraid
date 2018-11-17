@@ -1,0 +1,15 @@
+# General
+.DS_Store
+
+# IDE
+.idea
+
+# Source
+test
+build
+demos
+**/*.ts
+**/*.js.map
+
+# Libs
+node_modules
