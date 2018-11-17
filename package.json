@@ -2,6 +2,12 @@
   "name": "afraid",
   "version": "1.0.0",
   "description": "Express middlewares for validating incoming data with type inference",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobinBuschmann/afraid.git"
+  },
+  "bugs": "https://github.com/RobinBuschmann/afraid/issues",
+  "homepage": "https://github.com/RobinBuschmann/afraid#readme",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
