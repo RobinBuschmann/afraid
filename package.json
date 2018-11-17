@@ -15,7 +15,7 @@
     "build-express-ext": "node -r ts-node/register build/express-extension-factory.ts",
     "check-typings": "typings-checker --allow-expect-error --project test/typings/tsconfig.json test/typings/*.ts",
     "test": "mocha",
-    "prepublish": "npm test && npm run build && npm run check-typings"
+    "prepublishOnly": "npm run build-express-ext && npm run check-typings && npm test && npm run build"
   },
   "author": "Robin Baum",
   "license": "ISC",
