@@ -5,12 +5,11 @@ import * as request from 'supertest';
 import * as sinonChai from 'sinon-chai';
 import {SinonSpy, spy} from 'sinon';
 import {json} from 'body-parser';
-import {param} from '../../';
-import {fail} from '../../lib/validation-error-handler';
+import {f, fail, params} from '../../';
 
 use(sinonChai);
 
-describe('param', () => {
+describe('integration.params', () => {
 
     let app: Application;
     let handler: SinonSpy;
@@ -19,7 +18,10 @@ describe('param', () => {
         app = express();
         app.use(json());
         handler = spy((req, res, next) => res.sendStatus(200));
-        app.post('/:id', [param('id').int(), fail], handler as RequestHandler);
+        app.post('/:id', [
+            params(f('id').int()),
+            fail
+        ], handler as RequestHandler);
     });
 
     it('should transform param type correctly', async () => {
@@ -32,7 +34,7 @@ describe('param', () => {
     });
 
     it('should fail due to wrong param type', async () => {
-        await request(app).post('/abc').expect(400);
+        await request(app).post('/sdfsdf').expect(400);
     });
 
 });

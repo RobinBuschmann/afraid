@@ -1,13 +1,15 @@
 import * as express from 'express';
-import {query, fail} from '../../';
+import {query, f, fail} from '../../';
 
 const app = express();
 
 // Should infer types correctly
 app.post('/', [
-    query('limit').int(),
-    query('offset').int().opt(),
-    query('filters').string().array().opt(),
+    query(
+        f('limit').int(),
+        f('offset').int().opt(),
+        f('filters').string().array().opt(),
+    ),
     fail,
 ], (req, res, next) => {
 

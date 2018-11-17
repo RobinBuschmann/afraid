@@ -1,13 +1,13 @@
 import * as express from 'express';
-import {query, fail, param, body} from '../../';
+import {query, params, body, f, fail} from '../../';
 
 const app = express();
 
 // Should infer types correctly
 app.post('/', [
-    param('id').int(),
-    query('retries').int().opt(),
-    body('name').string(),
+    params(f('id').int()),
+    query(f('retries').int().opt()),
+    body(f('name').string()),
     fail,
 ], (req, res, next) => {
 

@@ -1,20 +1,23 @@
 {
-  "name": "express-transformer",
+  "name": "afraid",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "build-express-ext": "node -r ts-node/register build/express-extension-factory.ts",
+    "build-chain": "node -r ts-node/register build/chain-factory.ts",
     "check-typings": "typings-checker --allow-expect-error --project test/typings/tsconfig.json test/typings/*.ts",
     "test": "mocha"
   },
   "author": "",
   "license": "ISC",
+  "optionalDependencies": {
+    "class-transformer": "^0.1.9",
+    "reflect-metadata": "^0.1.12"
+  },
   "peerDependencies": {
     "@types/express": "*"
-  },
-  "dependencies": {
-    "express-validator": "^5.2.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
@@ -24,10 +27,10 @@
     "@types/sinon": "^5.0.1",
     "@types/sinon-chai": "^3.2.0",
     "@types/supertest": "^2.0.5",
+    "@types/validator": "^9.4.2",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "class-transformer": "^0.1.9",
-    "class-validator": "^0.9.1",
     "express": "^4.16.3",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
@@ -37,7 +40,8 @@
     "source-map-support": "^0.5.6",
     "supertest": "^3.1.0",
     "ts-node": "^7.0.0",
-    "typescript": "^3.0.1",
-    "typings-checker": "^2.0.0"
+    "typescript": "^3.1.6",
+    "typings-checker": "^2.0.0",
+    "validator": "^10.8.0"
   }
 }

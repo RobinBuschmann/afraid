@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {body, fail} from '../../';
+import {body, f, fail} from '../../';
 
 const app = express();
 
@@ -8,10 +8,12 @@ const app = express();
 
 // Should infer types correctly
 app.post('/', [
-    body('name').string().opt(),
-    body('birthday').date(),
-    body('email').string().isEmail(),
-    body('nicknames').string().array(),
+    body(
+        f('name').string().opt(),
+        f('birthday').date(),
+        f('email').string().isEmail(),
+        f('nicknames').string().array(),
+    ),
     fail,
 ], (req, res, next) => {
 

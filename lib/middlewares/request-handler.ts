@@ -9,6 +9,6 @@ export interface StrictRequest extends Request {
     query: {};
 }
 
-export interface TransformerHandler<R> {
+export interface TRequestHandler<R> {
     (req: R & StrictRequest, res: Response, next: NextFunction): any;
 }

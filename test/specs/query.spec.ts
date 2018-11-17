@@ -5,12 +5,11 @@ import * as request from 'supertest';
 import * as sinonChai from 'sinon-chai';
 import {SinonSpy, spy} from 'sinon';
 import {json} from 'body-parser';
-import {query} from '../../';
-import {fail} from '../../lib/validation-error-handler';
+import {f, fail, query} from '../../';
 
 use(sinonChai);
 
-describe('query', () => {
+describe('integration.query', () => {
 
     let app: Application;
     let handler: SinonSpy;
@@ -25,18 +24,22 @@ describe('query', () => {
         handler = spy((req, res, next) => res.sendStatus(200));
 
         app.get(users, [
-            query('limit').int(),
-            query('offset').int().opt(),
+            query(
+                f('limit').int(),
+                f('offset').int().opt(),
+            ),
             fail,
         ], handler as RequestHandler);
 
         app.get(consumedEnergy, [
-            query('kwh').float(),
+            query(
+                f('kwh').float()
+            ),
             fail,
         ], handler as RequestHandler);
 
         app.get(friends, [
-            query('filters').string().array(),
+            query(f('filters').string().array()),
             fail,
         ], handler as RequestHandler);
     });

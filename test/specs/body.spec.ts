@@ -5,14 +5,11 @@ import * as request from 'supertest';
 import * as sinonChai from 'sinon-chai';
 import {SinonSpy, spy} from 'sinon';
 import {json} from 'body-parser';
-import {body} from '../../';
-import {fail} from '../../lib/validation-error-handler';
-import {IsEmail, IsString} from 'class-validator';
-import {Type} from 'class-transformer';
+import {body, f, IsEmail, Field} from '../../';
 
 use(sinonChai);
 
-describe('body', () => {
+describe('integration.body', () => {
 
     const usersRoute = '/users';
     let app: Application;
@@ -45,11 +42,12 @@ describe('body', () => {
 
         beforeEach(() => {
             app.post(usersRoute, [
-                body('name').string(),
-                body('birthday').date(),
-                body('email').string().isEmail(),
-                fail,
-            ], handler as RequestHandler);
+                body(
+                    f('name').string(),
+                    f('birthday').date(),
+                    f('email').string().isEmail(),
+                ),
+            ], handler);
         });
 
         commonTestCases();
@@ -61,25 +59,24 @@ describe('body', () => {
         const friendsRoute = '/friends';
 
         class User {
-            @IsString()
+            @Field
             name: string;
 
             @IsEmail()
+            @Field
             email: string;
 
-            @Type(() => Date)
+            @Field(() => Date)
             birthday: Date;
         }
 
         beforeEach(() => {
             app.post(usersRoute, [
                 body(User),
-                fail,
             ], handler as RequestHandler);
 
             app.post(friendsRoute, [
                 body(User).array(),
-                fail,
             ], handler as RequestHandler);
         });
 

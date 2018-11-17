@@ -1,17 +1,17 @@
 import * as express from 'express';
-import {param, fail} from '../../';
+import {params, f, fail} from '../../';
 
 const app = express();
 
 // Should infer types correctly
 app.post('/', [
-    param('id').int(),
+    params(f('id').int()),
     fail,
 ], (req, res, next) => {
 
     // $ExpectType number
     req.params.id;
 
-    // $ExpectError Property 'doesNotExist' does not exist on type 'SetType<{ id: string; }, number>'.
+    // $ExpectError Property 'doesNotExist' does not exist on type 'SetType<{ id: any; }, number>'.
     req.params.doesNotExist;
 });
