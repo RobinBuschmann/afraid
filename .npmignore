@@ -9,6 +9,7 @@ test
 build
 demos
 **/*.ts
+!**/*.d.ts
 **/*.js.map
 
 # Libs
