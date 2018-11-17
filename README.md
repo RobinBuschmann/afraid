@@ -9,11 +9,12 @@ Type inference included!
 
 ## Installation
 ```bash
-npm install afraid --save
+npm install afraid --save --no-optional
 ```
 
-## Getting started
+## Usage
 ```typescript
+import {query, f, fail} from 'afraid';
 import * as express from 'express';
 
 const app = express();
@@ -30,17 +31,38 @@ app.get('/users', [
 });
 ```
 
-### Usage with classes (optional)
+## Using classes for validation and transformation (optional)
 
-*class-transformer* are requiring [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+#### Installation
+Omitting `--no-optional` will install required packages `class-transformer` and `reflect-metadata` automatically
 ```
-npm intall class-transformer --save
-npm install reflect-metadata --save
+npm install afraid --save 
 ```
-and the following flags in `tsconfig.json`:
+#### Configuration
+The following flags in `tsconfig.json`:
 ```json
 {
   "experimentalDecorators": true,
   "emitDecoratorMetadata": true
 }
+```
+
+#### Usage
+```typescript
+import {query, Field, IsInt, fail} from 'afraid'
+import * as express from 'express';
+
+const app = express();
+
+class UserDTO {
+    @Field name: string;
+    @IsInt() @Field age: number;
+}
+
+app.post('/users', [
+    body(UserDTO),
+    fail,
+], (req, res, next) => {
+    // ...
+});
 ```
