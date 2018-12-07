@@ -6,6 +6,7 @@ import {FieldMeta} from '../field-meta';
 
 const META_KEY = 'afraid:fields';
 const typeMap = new Map<object, string>([
+    [Number, FieldType.float],
     [String, FieldType.string],
     [Boolean, FieldType.boolean],
     [Date, FieldType.date],
