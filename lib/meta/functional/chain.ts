@@ -91,7 +91,7 @@ export interface Chain<OBJ extends {}> extends Handler{
 }
 
 export interface ChainBundler<OBJ> {
-    <T>(type: new () => T): Chain<SetType<OBJ, T>>
+    <T>(type: new (...args: any[]) => T): Chain<SetType<OBJ, T>>
     (): Chain<OBJ>
     <S1>(chain1: Chain<S1>): Chain<SetType<OBJ, S1>>
     <S1,S2>(chain1: Chain<S1>,chain2: Chain<S2>): Chain<SetType<OBJ, S1&S2>>
