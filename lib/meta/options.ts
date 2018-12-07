@@ -52,11 +52,17 @@ const shortCutOptions = mergeableOptions.reduce((acc, {from, to}) => {
     return acc;
 }, {});
 
-export const options = {
+export interface ChainOptions {
+    [key: string]: (...args: any[]) => object;
+}
+export const options: ChainOptions = {
     ...validatorOptions,
     ...shortCutOptions,
     opt: () => ({
         isOptional: true,
+    }),
+    description: (description) => ({
+        description,
     }),
     optional: () => ({
         isOptional: true,

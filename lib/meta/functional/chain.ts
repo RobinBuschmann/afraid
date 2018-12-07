@@ -13,6 +13,7 @@ export interface Chain<OBJ extends {}> extends Handler{
     array(): Chain<Arrayfy<OBJ>>;
     opt(): Chain<Partial<OBJ>>;
     sub: ChainBundler<OBJ>;
+    description(value: string): Chain<OBJ>;
 
     toDate(): Chain<OBJ>;
     toFloat(): Chain<OBJ>;

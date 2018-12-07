@@ -1,10 +1,11 @@
 import {createChain} from '../meta/functional/chain-factory';
-import {resolveFieldMeta as resolveClassFieldMeta} from '../meta/class/field-meta';
-import {resolveFieldMeta as resolveFunctionalFieldMeta} from '../meta/functional/field-meta';
 import {extractMeta} from '../meta/meta-utils';
 import {validate} from '../validation/validate';
 import {transform} from '../transformation/transform';
 import {ChainBundler} from '../meta/functional/chain';
+import {resolveClassFieldMeta} from '../meta/class/field-meta';
+import {resolveFunctionalFieldMeta} from '../meta/functional/field-meta';
+import {FieldType} from '../meta/field-type';
 
 const defaultOptions = {
     chain: createChain(),
@@ -25,7 +26,7 @@ const defaultOptions = {
 type MiddlewareFactory = <T extends string>(target: T, options?: Partial<typeof defaultOptions>) => ChainBundler<{ [X in T] }>;
 
 export const createMiddleware: MiddlewareFactory = (target, options = {}) => (...args: any[]) => {
-    const {chain, createHandler} = {...options, ...defaultOptions};
+    const {chain, createHandler} = {...defaultOptions, ...options};
     const [classReference] = args;
     const targetMeta = typeof classReference === 'function'
         ? resolveClassFieldMeta(classReference)
@@ -34,6 +35,6 @@ export const createMiddleware: MiddlewareFactory = (target, options = {}) => (..
     return Object.assign(
         createHandler(target),
         chain,
-        {meta: {field: target, ...targetMeta}},
+        {meta: {field: target, ...targetMeta, type: FieldType.object}},
     ) as any
 };

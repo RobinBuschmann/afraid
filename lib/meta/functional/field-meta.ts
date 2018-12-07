@@ -1,3 +1,3 @@
 import {extractMeta} from '../meta-utils';
 
-export const resolveFieldMeta = (objs) => ({fields: objs.map(extractMeta)});
+export const resolveFunctionalFieldMeta = (objs) => ({fields: objs.map(extractMeta)});

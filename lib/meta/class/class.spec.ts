@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Field} from './field';
 import {IsInt} from './decorators';
-import {resolveFieldMeta} from './field-meta';
+import {resolveClassFieldMeta} from './field-meta';
 import {FieldType} from '../field-type';
 
 describe('meta.class', () => {
@@ -22,7 +22,7 @@ describe('meta.class', () => {
     });
 
     it('should set meta data for validation/transformation', () => {
-       const {fields, transformers} = resolveFieldMeta(User);
+       const {fields, transformers} = resolveClassFieldMeta(User);
 
        const [nameMeta, ageMeta, addressMeta, friendsMeta] = fields;
 
