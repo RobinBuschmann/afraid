@@ -13,7 +13,7 @@ const typeMap = new Map<object, string>([
 /**
  * Map to resolve circular dependencies
  */
-const classFieldsMetaMap = new WeakMap<object, Array<any>>();
+const classFieldMetaMap = new WeakMap<object, Partial<FieldMeta>>();
 
 export const getAllFieldMeta = target =>
     Reflect.getMetadata(META_KEY, target) || {};
@@ -30,8 +30,8 @@ export const setFieldMeta = (target, field, fieldMeta) => {
 export const resolveClassFieldMeta = target => {
     const resolve = target => {
         const allFieldMeta = getAllFieldMeta(target.prototype);
-        const fields: FieldMeta[] = [];
-        classFieldsMetaMap.set(target, fields);
+        const field = {fields: [] as FieldMeta[], classRef: target};
+        classFieldMetaMap.set(target, field);
         return Object.keys(allFieldMeta)
             .reduce((acc, field) => {
                 const {typeFn, ...options} = allFieldMeta[field];
@@ -43,13 +43,13 @@ export const resolveClassFieldMeta = target => {
                     acc.fields.push({
                         ...options,
                         type: FieldType.object,
-                        fields: classFieldsMetaMap.has(typeObject)
-                            ? classFieldsMetaMap.get(typeObject)
-                            : resolve(typeObject),
+                        ...(classFieldMetaMap.has(typeObject)
+                            ? classFieldMetaMap.get(typeObject)
+                            : resolve(typeObject)),
                     });
                 }
                 return acc;
-            }, {fields, classRef: target})
+            }, field)
     };
     return {
         transformers: [v => getClassTransformer().plainToClass(target, v)],
