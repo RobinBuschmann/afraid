@@ -23,7 +23,7 @@ const defaultOptions = {
     }
 };
 
-type MiddlewareFactory = <T extends string>(target: T, options?: Partial<typeof defaultOptions>) => ChainBundler<{ [X in T] }>;
+type MiddlewareFactory = <T extends string>(target: T, options?: Partial<typeof defaultOptions>) => ChainBundler<{ [X in T]: any }>;
 
 export const createMiddleware: MiddlewareFactory = (target, options = {}) => (...args: any[]) => {
     const {chain, createHandler} = {...defaultOptions, ...options};
