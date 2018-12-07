@@ -1,6 +1,6 @@
 {
   "name": "afraid",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "Express middlewares for validating incoming data with type inference",
   "repository": {
     "type": "git",
