@@ -25,6 +25,7 @@
   },
   "peerDependencies": {
     "@types/express": "*",
+    "@types/validator": "9",
     "validator": "10"
   },
   "devDependencies": {
