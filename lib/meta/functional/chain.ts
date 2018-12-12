@@ -23,11 +23,11 @@ interface Handler {
 }
 
 export interface Chain<OBJ extends {}> extends Handler{
-    date(): Chain<SetType<OBJ, Date>>
-    float(): Chain<SetType<OBJ, number>>
-    int(): Chain<SetType<OBJ, number>>
-    string(): Chain<SetType<OBJ, string>>
-    boolean(strict?: boolean): Chain<SetType<OBJ, boolean>>
+    date(): Chain<SetType<OBJ, Date>>;
+    float(): Chain<SetType<OBJ, number>>;
+    int(): Chain<SetType<OBJ, number>>;
+    string(): Chain<SetType<OBJ, string>>;
+    boolean(strict?: boolean): Chain<SetType<OBJ, boolean>>;
     array(): Chain<Arrayfy<OBJ>>;
     opt(): Chain<Partial<OBJ>>;
     sub: ChainBundler<OBJ>;
@@ -96,13 +96,13 @@ export interface Chain<OBJ extends {}> extends Handler{
     normalizeEmail(email: string, options?: NormalizeEmailOptions): Chain<OBJ>;
     rtrim(chars?: string): Chain<OBJ>;
     stripLow(keep_new_lines?: boolean): Chain<OBJ>;
-    toBoolean(strict?: boolean): Chain<OBJ>;
-    toDate(): Chain<OBJ>;
-    toFloat(): Chain<OBJ>;
-    toInt(radix?: number): Chain<OBJ>;
+    toBoolean(strict?: boolean): Chain<SetType<OBJ, boolean>>;
+    toDate(): Chain<SetType<OBJ, Date>>;
+    toFloat(): Chain<SetType<OBJ, number>>;
+    toInt(radix?: number): Chain<SetType<OBJ, number>>;
     trim(chars?: string): Chain<OBJ>;
     whitelist(chars: string): Chain<OBJ>;
-    toString(input: any | any[]): Chain<OBJ>;
+    toString(input: any | any[]): Chain<SetType<OBJ, string>>;
 
 }
 
