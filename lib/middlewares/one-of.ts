@@ -17,10 +17,11 @@ export const oneOf: OneOfChainBundler = ((...middlewares: any[]) => {
         }
         next();
     };
+    const copyMiddleware = middleware => middleware.bind({});
 
     middlewares = middlewares.reduce((preparedMiddlewares, middleware) => [
         ...preparedMiddlewares,
-        Object.assign(middleware, {meta: mergeMeta((middleware.meta || {}), {isOneOfMany: true})}),
+        Object.assign(copyMiddleware(middleware), {meta: mergeMeta((middleware.meta || {}), {isOneOfMany: true})}),
         isOneOfValidationsSuccessful,
     ], []);
     return [extractValidationErrorsBeforeOneOf, ...middlewares, resetValidationErrorsWhenOneOfIsValid];
