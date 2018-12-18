@@ -14,7 +14,7 @@ const defaultOptions = {
         const wrapped = {[target]: req[target]};
 
         // todo optimize/make async
-        req.validationErrors = validate([meta], wrapped);
+        req.validationErrors = (req.validationErrors || []).concat(validate([meta], wrapped));
 
         // todo optimize/make async
         Object.assign(req, transform([meta], wrapped));

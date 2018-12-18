@@ -1,11 +1,11 @@
 import {toArray} from '../utils';
 
 export const validate = (options, objectOrObjects) => {
-    const results: any[] = [];
+    let results: any[] = [];
     toArray(objectOrObjects)
         .forEach((object) => {
             options.forEach(({field, isOptional, validators, fields}) => {
-                let value = object[field];
+                const value = object[field];
                 const values = toArray(value);
                 if (value !== undefined) {
                     if (fields) {
@@ -23,7 +23,7 @@ export const validate = (options, objectOrObjects) => {
                 if (!isOptional) {
                     results.push({field, value, msg: `Field "${field}" is missing`});
                 }
-            }, [])
+            });
         });
     return results;
 };

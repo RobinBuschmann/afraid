@@ -10,4 +10,5 @@ export interface FieldMeta {
     isOptional?: boolean;
     fields?: FieldMeta[];
     classRef?: any;
+    isOneOfMany?: boolean;
 }

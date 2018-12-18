@@ -1,4 +1,4 @@
-import {Arrayfy, SetType} from '../../utils';
+import {Arrayfy, Partialize, SetType} from '../../utils';
 import AlphaLocale = ValidatorJS.AlphaLocale;
 import AlphanumericLocale = ValidatorJS.AlphanumericLocale;
 import IsByteLengthOptions = ValidatorJS.IsByteLengthOptions;
@@ -129,4 +129,12 @@ export interface ChainBundler<OBJ> {
     <S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11,S12,S13,S14,S15,S16,S17,S18>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>,chain4: Chain<S4>,chain5: Chain<S5>,chain6: Chain<S6>,chain7: Chain<S7>,chain8: Chain<S8>,chain9: Chain<S9>,chain10: Chain<S10>,chain11: Chain<S11>,chain12: Chain<S12>,chain13: Chain<S13>,chain14: Chain<S14>,chain15: Chain<S15>,chain16: Chain<S16>,chain17: Chain<S17>,chain18: Chain<S18>): Chain<SetType<OBJ, S1&S2&S3&S4&S5&S6&S7&S8&S9&S10&S11&S12&S13&S14&S15&S16&S17&S18>>
     <S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11,S12,S13,S14,S15,S16,S17,S18,S19>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>,chain4: Chain<S4>,chain5: Chain<S5>,chain6: Chain<S6>,chain7: Chain<S7>,chain8: Chain<S8>,chain9: Chain<S9>,chain10: Chain<S10>,chain11: Chain<S11>,chain12: Chain<S12>,chain13: Chain<S13>,chain14: Chain<S14>,chain15: Chain<S15>,chain16: Chain<S16>,chain17: Chain<S17>,chain18: Chain<S18>,chain19: Chain<S19>): Chain<SetType<OBJ, S1&S2&S3&S4&S5&S6&S7&S8&S9&S10&S11&S12&S13&S14&S15&S16&S17&S18&S19>>
     <S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11,S12,S13,S14,S15,S16,S17,S18,S19,S20>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>,chain4: Chain<S4>,chain5: Chain<S5>,chain6: Chain<S6>,chain7: Chain<S7>,chain8: Chain<S8>,chain9: Chain<S9>,chain10: Chain<S10>,chain11: Chain<S11>,chain12: Chain<S12>,chain13: Chain<S13>,chain14: Chain<S14>,chain15: Chain<S15>,chain16: Chain<S16>,chain17: Chain<S17>,chain18: Chain<S18>,chain19: Chain<S19>,chain20: Chain<S20>): Chain<SetType<OBJ, S1&S2&S3&S4&S5&S6&S7&S8&S9&S10&S11&S12&S13&S14&S15&S16&S17&S18&S19&S20>>
+}
+
+export interface OneOfChainBundler {
+    <S1,S2>(chain1: Chain<S1>,chain2: Chain<S2>): Chain<S1|S2>
+    <S1,S2,S3>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>): Chain<S1|S2|S3>
+    <S1,S2,S3,S4>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>,chain4: Chain<S4>): Chain<S1|S2|S3|S4>
+    <S1,S2,S3,S4,S5>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>,chain4: Chain<S4>,chain5: Chain<S5>): Chain<S1|S2|S3|S4|S5>
+    <S1,S2,S3,S4,S5,S6>(chain1: Chain<S1>,chain2: Chain<S2>,chain3: Chain<S3>,chain4: Chain<S4>,chain5: Chain<S5>,chain6: Chain<S6>): Chain<S1|S2|S3|S4|S5|S6>
 }

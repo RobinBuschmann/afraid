@@ -11,7 +11,7 @@ export const cookies = createMiddleware('cookies');
 
 export const fail: Middleware<{}> = ((req, res, next) => {
     const validationErrors = (req.validationErrors || []);
-    if(validationErrors.length) {
+    if (validationErrors.length) {
         // todo
         next({statusCode: 400, validationErrors});
         return;

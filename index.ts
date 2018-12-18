@@ -18,6 +18,7 @@ export * from './lib/meta/options';
 
 export * from './lib/middlewares/middleware-factory';
 export * from './lib/middlewares/middlwares';
+export * from './lib/middlewares/one-of';
 export * from './lib/middlewares/request-handler';
 
 export * from './lib/transformation/transform';
