@@ -7,6 +7,11 @@ Type inference included!
 
 ![](https://github.com/RobinBuschmann/afraid/raw/master/demos/demo.gif)
 
+ - [Installation](#installation)
+ - [Usage](#usage)
+ - [Usage with classes](#using-classes-for-validation-and-transformation)
+ - [Generating swagger documentation](#swagger-documentation)
+
 ## Installation
 ```bash
 npm install afraid --save --no-optional
@@ -31,7 +36,7 @@ app.get('/users', [
 });
 ```
 
-## Using classes for validation and transformation (optional)
+## Using classes for validation and transformation
 
 #### Installation
 Omitting `--no-optional` will install required packages `class-transformer` and `reflect-metadata` automatically
@@ -66,3 +71,7 @@ app.post('/users', [
     // ...
 });
 ```
+
+## Swagger documentation
+Use [afraid-swagger](https://github.com/RobinBuschmann/afraid-swagger) to create swagger documentation from afraid 
+middlewares.
