@@ -1,7 +1,9 @@
 import * as validators from "validator";
 import {FieldType} from './field-type';
-import {extractMeta, mergeMeta} from './meta-utils';
+import {extractMeta, getMeta, mergeMeta} from './meta-utils';
 import {isTransformerName} from '../transformation/utils';
+import {resolveClassFieldMeta} from './class/field-meta';
+import {resolveFunctionalFieldMeta} from './functional/field-meta';
 
 const createValidatorMeta = (validator, options) => ({
     validators: [(value, field) => validator(String(value), ...options)
@@ -70,13 +72,13 @@ export const options: ChainOptions = {
     array: () => ({
         isArray: true,
     }),
-    sub: (...fields) => ({
+    sub: (...args) => ({
         type: FieldType.object,
-        fields: fields.map(extractMeta),
+        ...(getMeta(args))
     }),
-    object: (...fields) => ({
+    object: (...args) => ({
         type: FieldType.object,
-        fields: fields.map(extractMeta),
+        ...(getMeta(args))
     }),
 };
 

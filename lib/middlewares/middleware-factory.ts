@@ -1,5 +1,5 @@
 import {createChain} from '../meta/functional/chain-factory';
-import {extractMeta} from '../meta/meta-utils';
+import {extractMeta, getMeta} from '../meta/meta-utils';
 import {validate} from '../validation/validate';
 import {transform} from '../transformation/transform';
 import {ChainBundler} from '../meta/functional/chain';
@@ -27,14 +27,9 @@ type MiddlewareFactory = <T extends string>(target: T, options?: Partial<typeof 
 
 export const createMiddleware: MiddlewareFactory = (target, options = {}) => (...args: any[]) => {
     const {chain, createHandler} = {...defaultOptions, ...options};
-    const [classReference] = args;
-    const targetMeta = typeof classReference === 'function'
-        ? resolveClassFieldMeta(classReference)
-        : resolveFunctionalFieldMeta(args);
-
     return Object.assign(
         createHandler(target),
         chain,
-        {meta: {field: target, ...targetMeta, type: FieldType.object}},
+        {meta: {field: target, ...getMeta(args), type: FieldType.object}},
     ) as any
 };

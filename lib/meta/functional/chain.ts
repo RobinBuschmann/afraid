@@ -31,6 +31,7 @@ export interface Chain<OBJ extends {}> extends Handler{
     array(): Chain<Arrayfy<OBJ>>;
     opt(): Chain<Partial<OBJ>>;
     sub: ChainBundler<OBJ>;
+    object: ChainBundler<OBJ>;
     description(value: string): Chain<OBJ>;
 
     contains(elem: any): Chain<OBJ>;
